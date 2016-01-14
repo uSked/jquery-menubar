@@ -13,16 +13,16 @@ This jQuery UI menubar code just re-uses the current built-in jquery ui menu wid
 
 That's it! All jQuery UI menu options and callbacks are supported.
 
-## Known issues:
+## Known Issues
 The native jQuery menu widget has a few issues with the coloring of icons and anchors. This project includes a fix for the coloring of anchors, but I am still working on a fix for the coloring of icons in submenus.
 
 ## Usage
-
 $( selection ).menubar();
 
 ## Options
 The options are nearly identical to the jQuery menu widget and in fact many get passed directly to the jQuery menu widget.
 
+```
 options: {
   icons: {
     submenuDown: "ui-icon-carat-1-s",
@@ -45,7 +45,8 @@ options: {
   blur: null,
   focus: null,
   select: null
-},
+}
+```
 
 ## Proof It Works
 https://jsfiddle.net/mherbold/n8z7wghu/
