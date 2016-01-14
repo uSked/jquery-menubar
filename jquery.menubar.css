@@ -1,4 +1,4 @@
-.ui-menubar {display:inline-block; border-left:none; border-right:none;}
+.ui-menubar {display:inline-block; border-left:none; border-right:none; white-space:nowrap;}
 .ui-menubar > li {display:inline-block;}
 .ui-menubar li {font-weight:normal !important;}
 .ui-menubar .ui-menu-item {padding-right:2em;}
