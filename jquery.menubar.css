@@ -1,6 +1,6 @@
-.ui-menubar {display:inline-block; border-left:none; border-right:none; white-space:nowrap;}
+.ui-menubar {display:inline-block; border-left:none; border-right:none;}
 .ui-menubar > li {display:inline-block;}
-.ui-menubar li {font-weight:normal !important;}
+.ui-menubar li {white-space:nowrap; font-weight:normal !important;}
 .ui-menubar .ui-menu-item {padding-right:2em;}
 .ui-menubar .ui-menu-item a {text-decoration:none;}
 .ui-menubar .ui-state-focus a, .ui-menubar .ui-state-active a {color:inherit;}
