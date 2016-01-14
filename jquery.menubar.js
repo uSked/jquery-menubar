@@ -1,16 +1,3 @@
-/* Coded up by Marvin Herbold
- *
- * This jQuery UI menubar code just re-uses the current built-in jquery ui menu widget
- * and tweaks it a little bit to add full menubar support - the tweaks done are as follows:
- *
- * 1) Split position option into downPosition and rightPosition options
- * 2) Split submenu icon option into submenuDown and submenuRight icon options
- * 3) Split role option into role (default=menubar) and submenuRole (default=menu) options
- * 4) Switch around right/left/up/down keyboard mapping for top level menu items
- * 5) Only "-" will be converted to dividers - not spaces
- *
- * That's it! All jQuery UI menu options and callbacks are supported.
- */
 
 /* this is the custom menu widget extension to remap the key presses for the top level items only */
 var menubarMenu = $.widget("ui.menubarMenu", $.ui.menu, {
@@ -76,12 +63,8 @@ var menubar = $.widget("ui.menubar", {
     focus: null,
     select: null
   },
-
   _create: function() {
-
     var menubar = this;
-
-    /* create the menu bar - note the custom focus code to fix positioning of submenus */
     menubar.element.menubarMenu({
       icons: {
         submenu: menubar.options.submenuRight
@@ -91,18 +74,23 @@ var menubar = $.widget("ui.menubar", {
       position: menubar.options.downPosition,
       role: menubar.options.submenuRole,
       blur: menubar.options.blur,
+	  /* this bit of magic positions the submenus properly */
       focus: function(event, item) {
         if (menubar.element.get(0) === $(item).get(0).item.parent().get(0)) {
           $(this).menubarMenu("option", "position", menubar.options.downPosition);
         } else {
           $(this).menubarMenu("option", "position", menubar.options.rightPosition);
         }
-
-        menubar._trigger("focus", event, {
-          item: item
-        });
+        menubar._trigger("focus", event, item);
       },
-      select: this.options.select
+	  /* this bit of magic makes anchor elements work when the menuitem is selected */
+      select: function(event, ui) {
+        var anchor = ui.item.children("a").get(0);
+        if (typeof anchor !== "undefined") {
+          location = $(anchor).attr("href");
+        }
+        menubar._trigger("select", event, ui);
+      }
     });
 	
 	/* add the ui-menubar class */
@@ -115,5 +103,8 @@ var menubar = $.widget("ui.menubar", {
     menubar.element.children(".ui-menu-item").children("." + menubar.options.icons.submenuRight).each(function() {
       $(this).removeClass(menubar.options.icons.submenuRight).addClass(menubar.options.icons.submenuDown);
     });
+
+	/* don't let anchors inside the menubar get keyboard focus - the focus should stay on the li */
+	menubar.element.find("a").prop("tabindex", -1);
   }
 });
