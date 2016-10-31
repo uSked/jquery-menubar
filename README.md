@@ -17,7 +17,7 @@ That's it! All jQuery UI menu options and callbacks are supported.
 The native jQuery menu widget has a few issues with the coloring of icons and anchors. This project includes a fix for the coloring of anchors, but I am still working on a fix for the coloring of icons in submenus.
 
 ## Usage
-$( selection ).menubar();
+$( selector ).menubar();
 
 ## Options
 The options are nearly identical to the jQuery menu widget and in fact many get passed directly to the jQuery menu widget.
