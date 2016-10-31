@@ -85,11 +85,17 @@ var menubar = $.widget("ui.menubar", {
 			},
 			/* this bit of magic makes anchor elements work when the menuitem is selected */
 			select: function (event, ui) {
-				var anchor = ui.item.children("a").get(0);
-				if (typeof anchor !== "undefined") {
-					location = $(anchor).attr("href");
+				if (ui.item.menubarItemSelected) {
+					event.stopPropagation();
+				} else {
+					ui.item.menubarItemSelected = true;
+					var a = ui.item.children("a").get(0);
+					if (typeof a !== "undefined") {
+						a.click();
+					}
+					menubar._trigger("select", event, ui);
+					ui.item.menubarItemSelected = false;
 				}
-				menubar._trigger("select", event, ui);
 			}
 		});
 
